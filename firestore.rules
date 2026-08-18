@@ -1,0 +1,46 @@
+rules_version = '2';
+
+// Modular+ Firestore security rules.
+//
+// Only signed-in users count as "the business" here — anyone who is not
+// logged in is blocked from everything. To keep this to just you and
+// your partner, don't enable public sign-up: create exactly your two
+// accounts by hand in Firebase console -> Authentication -> Users ->
+// Add user. That's what actually restricts access, not this file alone.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    match /products/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /orders/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /customers/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /tasks/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /learning/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /schedule/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    // Deny everything else by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
