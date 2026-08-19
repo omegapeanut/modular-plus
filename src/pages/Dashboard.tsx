@@ -29,14 +29,17 @@ export default function Dashboard() {
         </p>
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
         {cards.map((c) => (
-          <div key={c.label} className="rounded-2xl border border-taupe bg-paper p-6">
-            <p className="text-xs font-medium uppercase tracking-wide text-ink-muted">
+          <div
+            key={c.label}
+            className="min-w-0 rounded-2xl border border-taupe bg-paper p-4 sm:p-6"
+          >
+            <p className="text-xs font-medium uppercase leading-snug tracking-wide text-ink-muted">
               {c.label}
             </p>
-            <p className="font-jp mt-3 text-3xl text-ink">{c.value}</p>
-            <p className="mt-1 text-xs text-ink-muted">{c.sub}</p>
+            <p className="font-jp mt-3 text-2xl text-ink sm:text-3xl">{c.value}</p>
+            <p className="mt-1 text-xs leading-snug text-ink-muted">{c.sub}</p>
           </div>
         ))}
       </div>

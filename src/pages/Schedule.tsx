@@ -48,26 +48,26 @@ export default function Schedule() {
 
       <form
         onSubmit={handleAdd}
-        className="mb-6 flex gap-3 rounded-2xl border border-taupe bg-paper p-4"
+        className="mb-6 flex flex-col gap-3 rounded-2xl border border-taupe bg-paper p-4 sm:flex-row"
       >
         <input
           required
           placeholder="Milestone"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="flex-1 rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink"
+          className="min-w-0 flex-1 rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink"
         />
         <input
           required
           type="date"
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
-          className="rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink"
+          className="w-full rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink sm:w-auto"
         />
         <button
           type="submit"
           disabled={saving}
-          className="rounded-md bg-clay px-4 py-2 text-sm font-medium text-paper hover:bg-clay-hover disabled:opacity-60"
+          className="shrink-0 rounded-md bg-clay px-4 py-2 text-sm font-medium text-paper hover:bg-clay-hover disabled:opacity-60"
         >
           Add
         </button>
@@ -84,10 +84,10 @@ export default function Schedule() {
             return (
               <div
                 key={m.id}
-                className="flex items-center justify-between rounded-xl border border-taupe bg-paper px-4 py-3"
+                className="flex min-w-0 items-center justify-between gap-3 rounded-xl border border-taupe bg-paper px-4 py-3"
               >
-                <div>
-                  <p className="font-medium text-ink">{m.title}</p>
+                <div className="min-w-0">
+                  <p className="truncate font-medium text-ink">{m.title}</p>
                   <p
                     className={`text-xs ${overdue ? 'font-medium text-rust' : 'text-ink-muted'}`}
                   >
@@ -96,7 +96,7 @@ export default function Schedule() {
                 </div>
                 <button
                   onClick={() => remove(m.id)}
-                  className="text-xs text-ink-muted hover:text-rust"
+                  className="shrink-0 text-xs text-ink-muted hover:text-rust"
                 >
                   Delete
                 </button>

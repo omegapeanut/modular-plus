@@ -48,14 +48,14 @@ export default function Customers() {
 
   return (
     <div>
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="font-jp text-2xl text-ink">Customers</h1>
           <p className="mt-1 text-sm text-ink-muted">Shared contact list and notes.</p>
         </div>
         <button
           onClick={() => setShowForm((s) => !s)}
-          className="rounded-md bg-clay px-4 py-2 text-sm font-medium text-paper hover:bg-clay-hover"
+          className="rounded-md bg-clay px-4 py-2 text-sm font-medium text-paper hover:bg-clay-hover sm:self-start"
         >
           {showForm ? 'Cancel' : '+ Add customer'}
         </button>
@@ -64,7 +64,7 @@ export default function Customers() {
       {showForm && (
         <form
           onSubmit={handleAdd}
-          className="mb-6 grid grid-cols-2 gap-4 rounded-2xl border border-taupe bg-paper p-6"
+          className="mb-6 grid grid-cols-1 gap-4 rounded-2xl border border-taupe bg-paper p-4 sm:grid-cols-2 sm:p-6"
         >
           <input
             required
@@ -107,17 +107,17 @@ export default function Customers() {
       ) : customers.length === 0 ? (
         <p className="text-sm text-ink-muted">No customers yet.</p>
       ) : (
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {customers.map((c) => (
             <div
               key={c.id}
-              className="rounded-2xl border border-taupe bg-paper p-5"
+              className="min-w-0 rounded-2xl border border-taupe bg-paper p-5"
             >
-              <div className="mb-1 flex items-start justify-between">
-                <h3 className="font-medium text-ink">{c.name}</h3>
+              <div className="mb-1 flex items-start justify-between gap-2">
+                <h3 className="min-w-0 truncate font-medium text-ink">{c.name}</h3>
                 <button
                   onClick={() => remove(c.id)}
-                  className="text-xs text-ink-muted hover:text-rust"
+                  className="shrink-0 text-xs text-ink-muted hover:text-rust"
                 >
                   Delete
                 </button>

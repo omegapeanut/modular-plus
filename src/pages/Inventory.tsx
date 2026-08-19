@@ -78,7 +78,7 @@ export default function Inventory() {
 
   return (
     <div>
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="font-jp text-2xl text-ink">Inventory &amp; Products</h1>
           <p className="mt-1 text-sm text-ink-muted">
@@ -87,7 +87,7 @@ export default function Inventory() {
         </div>
         <button
           onClick={() => setShowForm((s) => !s)}
-          className="rounded-md bg-clay px-4 py-2 text-sm font-medium text-paper hover:bg-clay-hover"
+          className="rounded-md bg-clay px-4 py-2 text-sm font-medium text-paper hover:bg-clay-hover sm:self-start"
         >
           {showForm ? 'Cancel' : '+ Add product'}
         </button>
@@ -96,7 +96,7 @@ export default function Inventory() {
       {showForm && (
         <form
           onSubmit={handleAdd}
-          className="mb-6 grid grid-cols-2 gap-4 rounded-2xl border border-taupe bg-paper p-6"
+          className="mb-6 grid grid-cols-1 gap-4 rounded-2xl border border-taupe bg-paper p-4 sm:grid-cols-2 sm:p-6"
         >
           <input
             required
@@ -147,67 +147,62 @@ export default function Inventory() {
       ) : products.length === 0 ? (
         <p className="text-sm text-ink-muted">No products yet.</p>
       ) : (
-        <div className="overflow-hidden rounded-2xl border border-taupe bg-paper">
-          <table className="w-full text-sm">
-            <thead className="bg-linen text-left text-xs uppercase tracking-wide text-ink-muted">
-              <tr>
-                <th className="px-4 py-3">Product</th>
-                <th className="px-4 py-3">SKU</th>
-                <th className="px-4 py-3">Quantity</th>
-                <th className="px-4 py-3">Price</th>
-                <th className="px-4 py-3"></th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-taupe">
-              {products.map((p) => (
-                <tr key={p.id}>
-                  <td className="flex items-center gap-3 px-4 py-3 text-ink">
-                    {p.imageUrl ? (
-                      <img
-                        src={p.imageUrl}
-                        alt=""
-                        className="h-8 w-8 rounded object-cover"
-                      />
-                    ) : (
-                      <div className="h-8 w-8 rounded bg-linen" />
-                    )}
-                    {p.name}
-                  </td>
-                  <td className="px-4 py-3 text-ink-muted">{p.sku || '—'}</td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => adjustQuantity(p.id, -1, p.quantity)}
-                        className="h-6 w-6 rounded border border-taupe text-ink-muted hover:bg-linen"
-                      >
-                        −
-                      </button>
-                      <span
-                        className={p.quantity <= 3 ? 'font-medium text-rust' : 'text-ink'}
-                      >
-                        {p.quantity}
-                      </span>
-                      <button
-                        onClick={() => adjustQuantity(p.id, 1, p.quantity)}
-                        className="h-6 w-6 rounded border border-taupe text-ink-muted hover:bg-linen"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </td>
-                  <td className="px-4 py-3 text-ink">${Number(p.price).toFixed(2)}</td>
-                  <td className="px-4 py-3 text-right">
+        <div className="space-y-3">
+          {products.map((p) => (
+            <div key={p.id} className="min-w-0 rounded-2xl border border-taupe bg-paper p-4">
+              <div className="flex min-w-0 items-center gap-3">
+                {p.imageUrl ? (
+                  <img
+                    src={p.imageUrl}
+                    alt=""
+                    className="h-10 w-10 shrink-0 rounded object-cover"
+                  />
+                ) : (
+                  <div className="h-10 w-10 shrink-0 rounded bg-linen" />
+                )}
+                <span className="min-w-0 flex-1 truncate font-medium text-ink">{p.name}</span>
+                <button
+                  onClick={() => remove(p.id)}
+                  className="shrink-0 text-xs text-ink-muted hover:text-rust"
+                >
+                  Delete
+                </button>
+              </div>
+
+              <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                <div className="min-w-0">
+                  <p className="text-xs uppercase tracking-wide text-ink-muted">SKU</p>
+                  <p className="truncate text-sm text-ink">{p.sku || '—'}</p>
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs uppercase tracking-wide text-ink-muted">Price</p>
+                  <p className="text-sm text-ink">${Number(p.price).toFixed(2)}</p>
+                </div>
+                <div className="col-span-2 min-w-0 sm:col-span-1">
+                  <p className="text-xs uppercase tracking-wide text-ink-muted">Quantity</p>
+                  <div className="mt-1 flex items-center gap-2">
                     <button
-                      onClick={() => remove(p.id)}
-                      className="text-xs text-ink-muted hover:text-rust"
+                      onClick={() => adjustQuantity(p.id, -1, p.quantity)}
+                      className="h-6 w-6 shrink-0 rounded border border-taupe text-ink-muted hover:bg-linen"
                     >
-                      Delete
+                      −
                     </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                    <span
+                      className={p.quantity <= 3 ? 'font-medium text-rust' : 'text-ink'}
+                    >
+                      {p.quantity}
+                    </span>
+                    <button
+                      onClick={() => adjustQuantity(p.id, 1, p.quantity)}
+                      className="h-6 w-6 shrink-0 rounded border border-taupe text-ink-muted hover:bg-linen"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>

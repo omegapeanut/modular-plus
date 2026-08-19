@@ -32,11 +32,27 @@
   color-scheme: light;
 }
 
+/* Safety net: nothing in this app should ever cause horizontal scroll,
+   on phone, tablet, or a narrowed desktop window. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   font-family: 'Work Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   background: var(--color-linen);
+  /* Guard against long unbroken strings (emails, URLs, SKUs) pushing
+     any box wider than its container — wrap instead of overflowing. */
+  overflow-wrap: anywhere;
+}
+
+img,
+table {
+  max-width: 100%;
 }
 
 .font-jp {

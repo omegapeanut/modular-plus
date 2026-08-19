@@ -67,7 +67,7 @@ export default function Orders() {
 
   return (
     <div>
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="font-jp text-2xl text-ink">Orders &amp; Sales</h1>
           <p className="mt-1 text-sm text-ink-muted">
@@ -76,7 +76,7 @@ export default function Orders() {
         </div>
         <button
           onClick={() => setShowForm((s) => !s)}
-          className="rounded-md bg-clay px-4 py-2 text-sm font-medium text-paper hover:bg-clay-hover"
+          className="rounded-md bg-clay px-4 py-2 text-sm font-medium text-paper hover:bg-clay-hover sm:self-start"
         >
           {showForm ? 'Cancel' : '+ New order'}
         </button>
@@ -85,14 +85,14 @@ export default function Orders() {
       {showForm && (
         <form
           onSubmit={handleAdd}
-          className="mb-6 grid grid-cols-3 gap-4 rounded-2xl border border-taupe bg-paper p-6"
+          className="mb-6 grid grid-cols-1 gap-4 rounded-2xl border border-taupe bg-paper p-4 sm:grid-cols-3 sm:p-6"
         >
           <input
             required
             placeholder="Customer name"
             value={customerName}
             onChange={(e) => setCustomerName(e.target.value)}
-            className="col-span-2 rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink"
+            className="rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink sm:col-span-2"
           />
           <input
             type="number"
@@ -106,7 +106,7 @@ export default function Orders() {
           <button
             type="submit"
             disabled={saving}
-            className="col-span-3 rounded-md bg-clay py-2 text-sm font-medium text-paper hover:bg-clay-hover disabled:opacity-60"
+            className="rounded-md bg-clay py-2 text-sm font-medium text-paper hover:bg-clay-hover disabled:opacity-60 sm:col-span-3"
           >
             {saving ? 'Saving…' : 'Create order'}
           </button>
@@ -118,46 +118,34 @@ export default function Orders() {
       ) : orders.length === 0 ? (
         <p className="text-sm text-ink-muted">No orders yet.</p>
       ) : (
-        <div className="overflow-hidden rounded-2xl border border-taupe bg-paper">
-          <table className="w-full text-sm">
-            <thead className="bg-linen text-left text-xs uppercase tracking-wide text-ink-muted">
-              <tr>
-                <th className="px-4 py-3">Customer</th>
-                <th className="px-4 py-3">Total</th>
-                <th className="px-4 py-3">Status</th>
-                <th className="px-4 py-3"></th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-taupe">
-              {orders.map((o) => (
-                <tr key={o.id}>
-                  <td className="px-4 py-3 text-ink">{o.customerName}</td>
-                  <td className="px-4 py-3 text-ink">${Number(o.total).toFixed(2)}</td>
-                  <td className="px-4 py-3">
-                    <select
-                      value={o.status}
-                      onChange={(e) => setStatus(o.id, e.target.value)}
-                      className={`rounded-full border-0 px-2 py-1 text-xs font-medium ${statusColor[o.status] || 'bg-linen text-ink-muted'}`}
-                    >
-                      {STATUSES.map((s) => (
-                        <option key={s} value={s}>
-                          {s}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                  <td className="px-4 py-3 text-right">
-                    <button
-                      onClick={() => remove(o.id)}
-                      className="text-xs text-ink-muted hover:text-rust"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="space-y-3">
+          {orders.map((o) => (
+            <div key={o.id} className="min-w-0 rounded-2xl border border-taupe bg-paper p-4">
+              <div className="flex min-w-0 items-start justify-between gap-3">
+                <span className="min-w-0 truncate font-medium text-ink">{o.customerName}</span>
+                <button
+                  onClick={() => remove(o.id)}
+                  className="shrink-0 text-xs text-ink-muted hover:text-rust"
+                >
+                  Delete
+                </button>
+              </div>
+              <div className="mt-3 flex flex-wrap items-center gap-3">
+                <span className="text-sm text-ink">${Number(o.total).toFixed(2)}</span>
+                <select
+                  value={o.status}
+                  onChange={(e) => setStatus(o.id, e.target.value)}
+                  className={`rounded-full border-0 px-2 py-1 text-xs font-medium ${statusColor[o.status] || 'bg-linen text-ink-muted'}`}
+                >
+                  {STATUSES.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>

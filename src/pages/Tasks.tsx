@@ -60,7 +60,7 @@ export default function Tasks() {
         </p>
       </div>
 
-      <form onSubmit={handleAdd} className="mb-6 flex gap-3">
+      <form onSubmit={handleAdd} className="mb-6 flex flex-col gap-3 sm:flex-row">
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -79,7 +79,7 @@ export default function Tasks() {
       {loading ? (
         <p className="text-sm text-ink-muted">Loading…</p>
       ) : (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {COLUMNS.map((column) => (
             <div key={column} className="rounded-2xl border border-taupe bg-linen p-4">
               <h3 className="mb-3 px-1 text-xs font-semibold uppercase tracking-wide text-ink-muted">

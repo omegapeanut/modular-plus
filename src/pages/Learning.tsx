@@ -43,7 +43,7 @@ export default function Learning() {
 
   return (
     <div>
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="font-jp text-2xl text-ink">Learning Material</h1>
           <p className="mt-1 text-sm text-ink-muted">
@@ -52,7 +52,7 @@ export default function Learning() {
         </div>
         <button
           onClick={() => setShowForm((s) => !s)}
-          className="rounded-md bg-clay px-4 py-2 text-sm font-medium text-paper hover:bg-clay-hover"
+          className="rounded-md bg-clay px-4 py-2 text-sm font-medium text-paper hover:bg-clay-hover sm:self-start"
         >
           {showForm ? 'Cancel' : '+ Add resource'}
         </button>
@@ -61,7 +61,7 @@ export default function Learning() {
       {showForm && (
         <form
           onSubmit={handleAdd}
-          className="mb-6 grid grid-cols-3 gap-4 rounded-2xl border border-taupe bg-paper p-6"
+          className="mb-6 grid grid-cols-1 gap-4 rounded-2xl border border-taupe bg-paper p-4 sm:grid-cols-3 sm:p-6"
         >
           <input
             required
@@ -87,7 +87,7 @@ export default function Learning() {
           <button
             type="submit"
             disabled={saving}
-            className="col-span-3 rounded-md bg-clay py-2 text-sm font-medium text-paper hover:bg-clay-hover disabled:opacity-60"
+            className="rounded-md bg-clay py-2 text-sm font-medium text-paper hover:bg-clay-hover disabled:opacity-60 sm:col-span-3"
           >
             {saving ? 'Saving…' : 'Add resource'}
           </button>
@@ -103,14 +103,14 @@ export default function Learning() {
           {resources.map((r) => (
             <div
               key={r.id}
-              className="flex items-center justify-between rounded-xl border border-taupe bg-paper px-4 py-3"
+              className="flex items-center justify-between gap-3 rounded-xl border border-taupe bg-paper px-4 py-3"
             >
-              <div>
+              <div className="min-w-0">
                 <a
                   href={r.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="font-medium text-ink hover:text-clay"
+                  className="block truncate font-medium text-ink hover:text-clay"
                 >
                   {r.title}
                 </a>
@@ -118,7 +118,7 @@ export default function Learning() {
               </div>
               <button
                 onClick={() => remove(r.id)}
-                className="text-xs text-ink-muted hover:text-rust"
+                className="shrink-0 text-xs text-ink-muted hover:text-rust"
               >
                 Delete
               </button>
