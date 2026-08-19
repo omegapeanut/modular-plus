@@ -30,21 +30,22 @@ export default function Login() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
-      <div className="w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-        <div className="mb-6 text-center">
-          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-slate-900 text-xl font-bold text-white">
-            M+
+    <div className="flex min-h-screen items-center justify-center bg-linen px-4">
+      <div className="w-full max-w-sm rounded-2xl border border-taupe bg-paper p-10 shadow-[0_1px_2px_rgba(43,38,33,0.04)]">
+        <div className="mb-8 text-center">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-clay text-lg font-medium text-paper">
+            +
           </div>
-          <h1 className="text-xl font-semibold text-slate-900">Modular+</h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <h1 className="font-jp text-2xl text-ink">Modular Plus</h1>
+          <div className="mx-auto mt-3 h-px w-10 bg-taupe" />
+          <p className="mt-3 text-sm text-ink-muted">
             Sign in to the business dashboard
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="mb-1 block text-sm font-medium text-slate-700">
+            <label className="mb-1 block text-sm font-medium text-ink">
               Email
             </label>
             <input
@@ -52,12 +53,12 @@ export default function Login() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900"
+              className="w-full rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink outline-none focus:border-clay focus:ring-1 focus:ring-clay"
               placeholder="you@modularplus.com"
             />
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-slate-700">
+            <label className="mb-1 block text-sm font-medium text-ink">
               Password
             </label>
             <input
@@ -65,23 +66,23 @@ export default function Login() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900"
+              className="w-full rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink outline-none focus:border-clay focus:ring-1 focus:ring-clay"
               placeholder="••••••••"
             />
           </div>
 
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {error && <p className="text-sm text-rust">{error}</p>}
 
           <button
             type="submit"
             disabled={submitting}
-            className="w-full rounded-lg bg-slate-900 py-2 text-sm font-medium text-white transition hover:bg-slate-800 disabled:opacity-60"
+            className="w-full rounded-md bg-clay py-2 text-sm font-medium text-paper transition hover:bg-clay-hover disabled:opacity-60"
           >
             {submitting ? 'Signing in…' : 'Sign in'}
           </button>
         </form>
 
-        <p className="mt-6 text-center text-xs text-slate-400">
+        <p className="mt-8 text-center text-xs text-ink-muted">
           Accounts are created in the Firebase console — ask your partner if
           you don't have one yet.
         </p>

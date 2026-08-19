@@ -41,42 +41,42 @@ export default function Schedule() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-semibold text-slate-900">Project Schedule</h1>
-        <p className="text-sm text-slate-500">Milestones and deadlines, soonest first.</p>
+      <div className="mb-8">
+        <h1 className="font-jp text-2xl text-ink">Project Schedule</h1>
+        <p className="mt-1 text-sm text-ink-muted">Milestones and deadlines, soonest first.</p>
       </div>
 
       <form
         onSubmit={handleAdd}
-        className="mb-6 flex gap-3 rounded-xl border border-slate-200 bg-white p-4"
+        className="mb-6 flex gap-3 rounded-2xl border border-taupe bg-paper p-4"
       >
         <input
           required
           placeholder="Milestone"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm"
+          className="flex-1 rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink"
         />
         <input
           required
           type="date"
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
-          className="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+          className="rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink"
         />
         <button
           type="submit"
           disabled={saving}
-          className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-60"
+          className="rounded-md bg-clay px-4 py-2 text-sm font-medium text-paper hover:bg-clay-hover disabled:opacity-60"
         >
           Add
         </button>
       </form>
 
       {loading ? (
-        <p className="text-sm text-slate-500">Loading…</p>
+        <p className="text-sm text-ink-muted">Loading…</p>
       ) : sorted.length === 0 ? (
-        <p className="text-sm text-slate-500">Nothing scheduled yet.</p>
+        <p className="text-sm text-ink-muted">Nothing scheduled yet.</p>
       ) : (
         <div className="space-y-2">
           {sorted.map((m) => {
@@ -84,19 +84,19 @@ export default function Schedule() {
             return (
               <div
                 key={m.id}
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3"
+                className="flex items-center justify-between rounded-xl border border-taupe bg-paper px-4 py-3"
               >
                 <div>
-                  <p className="font-medium text-slate-900">{m.title}</p>
+                  <p className="font-medium text-ink">{m.title}</p>
                   <p
-                    className={`text-xs ${overdue ? 'font-medium text-red-600' : 'text-slate-400'}`}
+                    className={`text-xs ${overdue ? 'font-medium text-rust' : 'text-ink-muted'}`}
                   >
                     {m.dueDate} {overdue && '· overdue'}
                   </p>
                 </div>
                 <button
                   onClick={() => remove(m.id)}
-                  className="text-xs text-slate-400 hover:text-red-600"
+                  className="text-xs text-ink-muted hover:text-rust"
                 >
                   Delete
                 </button>

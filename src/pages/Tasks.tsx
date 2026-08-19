@@ -53,9 +53,9 @@ export default function Tasks() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-semibold text-slate-900">Team Tasks</h1>
-        <p className="text-sm text-slate-500">
+      <div className="mb-8">
+        <h1 className="font-jp text-2xl text-ink">Team Tasks</h1>
+        <p className="mt-1 text-sm text-ink-muted">
           A shared board — drag isn't wired up, just move cards with the buttons.
         </p>
       </div>
@@ -65,24 +65,24 @@ export default function Tasks() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="New task…"
-          className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm"
+          className="flex-1 rounded-md border border-taupe bg-paper px-3 py-2 text-sm text-ink"
         />
         <button
           type="submit"
           disabled={saving}
-          className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-60"
+          className="rounded-md bg-clay px-4 py-2 text-sm font-medium text-paper hover:bg-clay-hover disabled:opacity-60"
         >
           Add
         </button>
       </form>
 
       {loading ? (
-        <p className="text-sm text-slate-500">Loading…</p>
+        <p className="text-sm text-ink-muted">Loading…</p>
       ) : (
         <div className="grid grid-cols-3 gap-4">
           {COLUMNS.map((column) => (
-            <div key={column} className="rounded-xl bg-slate-100 p-3">
-              <h3 className="mb-3 px-1 text-xs font-semibold uppercase text-slate-500">
+            <div key={column} className="rounded-2xl border border-taupe bg-linen p-4">
+              <h3 className="mb-3 px-1 text-xs font-semibold uppercase tracking-wide text-ink-muted">
                 {column} ·{' '}
                 {tasks.filter((t) => t.status === column).length}
               </h3>
@@ -94,10 +94,10 @@ export default function Tasks() {
                     return (
                       <div
                         key={t.id}
-                        className="rounded-lg border border-slate-200 bg-white p-3 text-sm shadow-sm"
+                        className="rounded-xl border border-taupe bg-paper p-3 text-sm"
                       >
-                        <p className="mb-2 text-slate-800">{t.title}</p>
-                        <p className="mb-2 truncate text-xs text-slate-400">
+                        <p className="mb-2 text-ink">{t.title}</p>
+                        <p className="mb-2 truncate text-xs text-ink-muted">
                           {t.assignee}
                         </p>
                         <div className="flex items-center justify-between">
@@ -107,7 +107,7 @@ export default function Tasks() {
                                 onClick={() =>
                                   setStatus(t.id, COLUMNS[currentIndex - 1])
                                 }
-                                className="rounded border border-slate-200 px-2 py-0.5 text-xs text-slate-500 hover:bg-slate-50"
+                                className="rounded border border-taupe px-2 py-0.5 text-xs text-ink-muted hover:bg-linen"
                               >
                                 ←
                               </button>
@@ -117,7 +117,7 @@ export default function Tasks() {
                                 onClick={() =>
                                   setStatus(t.id, COLUMNS[currentIndex + 1])
                                 }
-                                className="rounded border border-slate-200 px-2 py-0.5 text-xs text-slate-500 hover:bg-slate-50"
+                                className="rounded border border-taupe px-2 py-0.5 text-xs text-ink-muted hover:bg-linen"
                               >
                                 →
                               </button>
@@ -125,7 +125,7 @@ export default function Tasks() {
                           </div>
                           <button
                             onClick={() => remove(t.id)}
-                            className="text-xs text-slate-400 hover:text-red-600"
+                            className="text-xs text-ink-muted hover:text-rust"
                           >
                             ✕
                           </button>

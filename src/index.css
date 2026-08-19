@@ -1,4 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500;600&family=Work+Sans:wght@400;500;600&display=swap');
 @import "tailwindcss";
+
+/* Japandi palette: warm linen/paper surfaces, ink text, clay accent,
+   muted sage/ochre/rust/mist for status. Kept low-saturation and
+   warm on purpose — this is a modular kitchen brand, not a SaaS tool. */
+@theme {
+  --color-linen: #f5f1ea;
+  --color-paper: #fbf8f3;
+  --color-taupe: #e4dccb;
+  --color-ink: #2b2621;
+  --color-ink-muted: #8b8172;
+
+  --color-clay: #8a4a34;
+  --color-clay-hover: #723c2a;
+  --color-clay-soft: #c97f5e;
+
+  --color-sage: #6b7a5e;
+  --color-sage-bg: #e8ecdf;
+
+  --color-ochre: #a9803f;
+  --color-ochre-bg: #f1e8d4;
+
+  --color-rust: #a6503f;
+  --color-rust-bg: #f1e1d9;
+
+  --color-mist: #6e869a;
+  --color-mist-bg: #e4eaee;
+}
 
 :root {
   color-scheme: light;
@@ -6,6 +34,11 @@
 
 body {
   margin: 0;
-  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Work Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
+  background: var(--color-linen);
+}
+
+.font-jp {
+  font-family: 'Zen Old Mincho', serif;
 }

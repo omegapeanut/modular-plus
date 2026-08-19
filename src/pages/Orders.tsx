@@ -20,11 +20,11 @@ interface Order {
 }
 
 const statusColor: Record<string, string> = {
-  New: 'bg-blue-100 text-blue-700',
-  Processing: 'bg-amber-100 text-amber-700',
-  Shipped: 'bg-purple-100 text-purple-700',
-  Completed: 'bg-green-100 text-green-700',
-  Cancelled: 'bg-red-100 text-red-700',
+  New: 'bg-mist-bg text-mist',
+  Processing: 'bg-ochre-bg text-ochre',
+  Shipped: 'bg-sage-bg text-sage',
+  Completed: 'bg-clay/10 text-clay',
+  Cancelled: 'bg-rust-bg text-rust',
 }
 
 export default function Orders() {
@@ -67,16 +67,16 @@ export default function Orders() {
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900">Orders &amp; Sales</h1>
-          <p className="text-sm text-slate-500">
+          <h1 className="font-jp text-2xl text-ink">Orders &amp; Sales</h1>
+          <p className="mt-1 text-sm text-ink-muted">
             {orders.length} orders · ${revenue.toFixed(2)} total revenue
           </p>
         </div>
         <button
           onClick={() => setShowForm((s) => !s)}
-          className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
+          className="rounded-md bg-clay px-4 py-2 text-sm font-medium text-paper hover:bg-clay-hover"
         >
           {showForm ? 'Cancel' : '+ New order'}
         </button>
@@ -85,14 +85,14 @@ export default function Orders() {
       {showForm && (
         <form
           onSubmit={handleAdd}
-          className="mb-6 grid grid-cols-3 gap-4 rounded-xl border border-slate-200 bg-white p-5"
+          className="mb-6 grid grid-cols-3 gap-4 rounded-2xl border border-taupe bg-paper p-6"
         >
           <input
             required
             placeholder="Customer name"
             value={customerName}
             onChange={(e) => setCustomerName(e.target.value)}
-            className="col-span-2 rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            className="col-span-2 rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink"
           />
           <input
             type="number"
@@ -101,12 +101,12 @@ export default function Orders() {
             placeholder="Total ($)"
             value={total}
             onChange={(e) => setTotal(e.target.value)}
-            className="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            className="rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink"
           />
           <button
             type="submit"
             disabled={saving}
-            className="col-span-3 rounded-lg bg-slate-900 py-2 text-sm font-medium text-white disabled:opacity-60"
+            className="col-span-3 rounded-md bg-clay py-2 text-sm font-medium text-paper hover:bg-clay-hover disabled:opacity-60"
           >
             {saving ? 'Saving…' : 'Create order'}
           </button>
@@ -114,13 +114,13 @@ export default function Orders() {
       )}
 
       {loading ? (
-        <p className="text-sm text-slate-500">Loading…</p>
+        <p className="text-sm text-ink-muted">Loading…</p>
       ) : orders.length === 0 ? (
-        <p className="text-sm text-slate-500">No orders yet.</p>
+        <p className="text-sm text-ink-muted">No orders yet.</p>
       ) : (
-        <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <div className="overflow-hidden rounded-2xl border border-taupe bg-paper">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 text-left text-xs uppercase text-slate-500">
+            <thead className="bg-linen text-left text-xs uppercase tracking-wide text-ink-muted">
               <tr>
                 <th className="px-4 py-3">Customer</th>
                 <th className="px-4 py-3">Total</th>
@@ -128,16 +128,16 @@ export default function Orders() {
                 <th className="px-4 py-3"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-taupe">
               {orders.map((o) => (
                 <tr key={o.id}>
-                  <td className="px-4 py-3">{o.customerName}</td>
-                  <td className="px-4 py-3">${Number(o.total).toFixed(2)}</td>
+                  <td className="px-4 py-3 text-ink">{o.customerName}</td>
+                  <td className="px-4 py-3 text-ink">${Number(o.total).toFixed(2)}</td>
                   <td className="px-4 py-3">
                     <select
                       value={o.status}
                       onChange={(e) => setStatus(o.id, e.target.value)}
-                      className={`rounded-full border-0 px-2 py-1 text-xs font-medium ${statusColor[o.status] || 'bg-slate-100 text-slate-700'}`}
+                      className={`rounded-full border-0 px-2 py-1 text-xs font-medium ${statusColor[o.status] || 'bg-linen text-ink-muted'}`}
                     >
                       {STATUSES.map((s) => (
                         <option key={s} value={s}>
@@ -149,7 +149,7 @@ export default function Orders() {
                   <td className="px-4 py-3 text-right">
                     <button
                       onClick={() => remove(o.id)}
-                      className="text-xs text-slate-400 hover:text-red-600"
+                      className="text-xs text-ink-muted hover:text-rust"
                     >
                       Delete
                     </button>

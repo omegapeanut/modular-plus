@@ -78,18 +78,16 @@ export default function Inventory() {
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900">
-            Inventory &amp; Products
-          </h1>
-          <p className="text-sm text-slate-500">
+          <h1 className="font-jp text-2xl text-ink">Inventory &amp; Products</h1>
+          <p className="mt-1 text-sm text-ink-muted">
             Stock levels update live for both of you.
           </p>
         </div>
         <button
           onClick={() => setShowForm((s) => !s)}
-          className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
+          className="rounded-md bg-clay px-4 py-2 text-sm font-medium text-paper hover:bg-clay-hover"
         >
           {showForm ? 'Cancel' : '+ Add product'}
         </button>
@@ -98,27 +96,27 @@ export default function Inventory() {
       {showForm && (
         <form
           onSubmit={handleAdd}
-          className="mb-6 grid grid-cols-2 gap-4 rounded-xl border border-slate-200 bg-white p-5"
+          className="mb-6 grid grid-cols-2 gap-4 rounded-2xl border border-taupe bg-paper p-6"
         >
           <input
             required
             placeholder="Product name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            className="rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink"
           />
           <input
             placeholder="SKU"
             value={sku}
             onChange={(e) => setSku(e.target.value)}
-            className="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            className="rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink"
           />
           <input
             type="number"
             placeholder="Quantity"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
-            className="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            className="rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink"
           />
           <input
             type="number"
@@ -126,18 +124,18 @@ export default function Inventory() {
             placeholder="Price"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            className="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            className="rounded-md border border-taupe bg-linen px-3 py-2 text-sm text-ink"
           />
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setFile(e.target.files?.[0] || null)}
-            className="col-span-2 text-sm"
+            className="col-span-2 text-sm text-ink-muted"
           />
           <button
             type="submit"
             disabled={saving}
-            className="col-span-2 rounded-lg bg-slate-900 py-2 text-sm font-medium text-white disabled:opacity-60"
+            className="col-span-2 rounded-md bg-clay py-2 text-sm font-medium text-paper hover:bg-clay-hover disabled:opacity-60"
           >
             {saving ? 'Saving…' : 'Save product'}
           </button>
@@ -145,13 +143,13 @@ export default function Inventory() {
       )}
 
       {loading ? (
-        <p className="text-sm text-slate-500">Loading…</p>
+        <p className="text-sm text-ink-muted">Loading…</p>
       ) : products.length === 0 ? (
-        <p className="text-sm text-slate-500">No products yet.</p>
+        <p className="text-sm text-ink-muted">No products yet.</p>
       ) : (
-        <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <div className="overflow-hidden rounded-2xl border border-taupe bg-paper">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 text-left text-xs uppercase text-slate-500">
+            <thead className="bg-linen text-left text-xs uppercase tracking-wide text-ink-muted">
               <tr>
                 <th className="px-4 py-3">Product</th>
                 <th className="px-4 py-3">SKU</th>
@@ -160,10 +158,10 @@ export default function Inventory() {
                 <th className="px-4 py-3"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-taupe">
               {products.map((p) => (
                 <tr key={p.id}>
-                  <td className="flex items-center gap-3 px-4 py-3">
+                  <td className="flex items-center gap-3 px-4 py-3 text-ink">
                     {p.imageUrl ? (
                       <img
                         src={p.imageUrl}
@@ -171,37 +169,37 @@ export default function Inventory() {
                         className="h-8 w-8 rounded object-cover"
                       />
                     ) : (
-                      <div className="h-8 w-8 rounded bg-slate-100" />
+                      <div className="h-8 w-8 rounded bg-linen" />
                     )}
                     {p.name}
                   </td>
-                  <td className="px-4 py-3 text-slate-500">{p.sku || '—'}</td>
+                  <td className="px-4 py-3 text-ink-muted">{p.sku || '—'}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => adjustQuantity(p.id, -1, p.quantity)}
-                        className="h-6 w-6 rounded border border-slate-200 text-slate-500 hover:bg-slate-50"
+                        className="h-6 w-6 rounded border border-taupe text-ink-muted hover:bg-linen"
                       >
                         −
                       </button>
                       <span
-                        className={p.quantity <= 3 ? 'font-medium text-red-600' : ''}
+                        className={p.quantity <= 3 ? 'font-medium text-rust' : 'text-ink'}
                       >
                         {p.quantity}
                       </span>
                       <button
                         onClick={() => adjustQuantity(p.id, 1, p.quantity)}
-                        className="h-6 w-6 rounded border border-slate-200 text-slate-500 hover:bg-slate-50"
+                        className="h-6 w-6 rounded border border-taupe text-ink-muted hover:bg-linen"
                       >
                         +
                       </button>
                     </div>
                   </td>
-                  <td className="px-4 py-3">${Number(p.price).toFixed(2)}</td>
+                  <td className="px-4 py-3 text-ink">${Number(p.price).toFixed(2)}</td>
                   <td className="px-4 py-3 text-right">
                     <button
                       onClick={() => remove(p.id)}
-                      className="text-xs text-slate-400 hover:text-red-600"
+                      className="text-xs text-ink-muted hover:text-rust"
                     >
                       Delete
                     </button>

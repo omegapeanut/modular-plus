@@ -22,19 +22,21 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-semibold text-slate-900">Overview</h1>
-        <p className="text-sm text-slate-500">
+      <div className="mb-8">
+        <h1 className="font-jp text-2xl text-ink">Overview</h1>
+        <p className="mt-1 text-sm text-ink-muted">
           Live snapshot of the business — updates instantly for both of you.
         </p>
       </div>
 
       <div className="grid grid-cols-4 gap-4">
         {cards.map((c) => (
-          <div key={c.label} className="rounded-xl border border-slate-200 bg-white p-5">
-            <p className="text-xs font-medium uppercase text-slate-400">{c.label}</p>
-            <p className="mt-2 text-3xl font-semibold text-slate-900">{c.value}</p>
-            <p className="mt-1 text-xs text-slate-400">{c.sub}</p>
+          <div key={c.label} className="rounded-2xl border border-taupe bg-paper p-6">
+            <p className="text-xs font-medium uppercase tracking-wide text-ink-muted">
+              {c.label}
+            </p>
+            <p className="font-jp mt-3 text-3xl text-ink">{c.value}</p>
+            <p className="mt-1 text-xs text-ink-muted">{c.sub}</p>
           </div>
         ))}
       </div>
